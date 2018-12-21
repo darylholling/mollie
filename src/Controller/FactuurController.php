@@ -9,12 +9,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Route("/factuur")
  */
 class FactuurController extends AbstractController
 {
+    protected $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
+
     /**
      * @Route("/", name="factuur_index", methods={"GET"})
      * @param FactuurRepository $factuurRepository
@@ -22,7 +31,13 @@ class FactuurController extends AbstractController
      */
     public function index(FactuurRepository $factuurRepository): Response
     {
-        return $this->render('factuur/index.html.twig', ['factuurs' => $factuurRepository->findAll()]);
+        if ($this->isGranted("ROLE_ADMIN")) {
+            return $this->render('factuur/index.html.twig', ['factuur' => $factuurRepository->findAll()]);
+        } elseif ($this->isGranted("ROLE_USER")) {
+            return $this->render('factuur/index.html.twig', ['factuur' => $factuurRepository->findBy(['user' => $this->getUser()])]);
+        } else {
+            return new Response('not ok', 404);
+        }
     }
 
     /**
@@ -58,7 +73,13 @@ class FactuurController extends AbstractController
      */
     public function show(Factuur $factuur): Response
     {
-        return $this->render('factuur/show.html.twig', ['factuur' => $factuur]);
+        if ($this->isGranted("ROLE_ADMIN")) {
+            return $this->render('factuur/show.html.twig', ['factuur' => $factuur]);
+        } elseif ($this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
+            return $this->render('factuur/show.html.twig', ['factuur' => $factuur]);
+        } else {
+            return new Response('not ok', 404);
+        }
     }
 
     /**
@@ -69,7 +90,12 @@ class FactuurController extends AbstractController
      */
     public function edit(Request $request, Factuur $factuur): Response
     {
-        $form = $this->createForm(FactuurType::class, $factuur);
+        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
+            $form = $this->createForm(FactuurType::class, $factuur);
+        } else {
+            return new Response('not ok', 404);
+
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -92,10 +118,14 @@ class FactuurController extends AbstractController
      */
     public function delete(Request $request, Factuur $factuur): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$factuur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($factuur);
-            $entityManager->flush();
+        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
+            if ($this->isCsrfTokenValid('delete' . $factuur->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($factuur);
+                $entityManager->flush();
+            }
+        } else {
+            return new Response('not ok', 404);
         }
 
         return $this->redirectToRoute('factuur_index');

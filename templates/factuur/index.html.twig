@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        {% if not factuurs %}
+        {% if not factuur %}
             <h1>Geen facturen</h1>
         {% else %}
             <h1 class="text-center">Facturen overzicht</h1>
@@ -14,14 +14,16 @@
                 <tr>
                     <th>Id</th>
                     <th>Timestamp</th>
+                    <th>User</th>
                     <th>actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for factuur in factuurs %}
+                {% for factuur in factuur %}
                     <tr>
                         <td>{{ factuur.id }}</td>
                         <td>{{ factuur.timestamp ? factuur.timestamp|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ factuur.user }}</td>
                         <td>
                             <a href="{{ path('factuur_show', {'id': factuur.id}) }}" class="btn btn-info">show</a>
                             <a href="{{ path('factuur_edit', {'id': factuur.id}) }}" class="btn btn-primary">edit</a>
