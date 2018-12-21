@@ -6,62 +6,66 @@
 
     <ul class="thumbnails">
 
-    {% if empty %}
-        <h5>Your shopping cart is empty.</h5>
-    {% endif %}
+
     {% set cart = app.session.get('cart') %}
     {% set total = 0 %}
     {% set count = 0 %}
 
-    {% if product %}
-        <div class="row">
-            <div class="col-md-10">
-                <table class="table table-responsive">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Aantal</th>
-                        <th>Afbeelding</th>
-                        <th>Prijs</th>
-                        <th>Totaal</th>
-                        <th>Add</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+    {% if cart is empty %}
+        <h5>Your shopping cart is empty.</h5>
+    {% else %}
 
-                    {% for key, item in cart %}
+        {% if product %}
+            <div class="row">
+                <div class="col-md-10">
+                    <table class="table table-responsive">
+                        <thead>
                         <tr>
-                            <td>{{ key }}</td>
-                            <td>{{ item }}</td>
-                            {% for row in product %}
-                                {% if row.id == key %}
-                                    {#<td><img src="{{ asset('images/products/' ~ product.imageName) }}" alt="images" width="80px"></td>#}
-                                    <td>x</td>
-                                    <td>€{{ row.prijs | number_format(2) }}</td>
-                                    <td>€{{ (row.prijs * item) | number_format(2) }}</td>
-                                    {% set total = total + (row.prijs * item) %}
-                                {% endif %}
-                            {% endfor %}
-                            <td><a href="{{ path('cart_add', {'id': key}) }}">
-                                    <button class="btn btn-success">Add</button>
-                                </a></td>
-                            <td><a href="{{ path('cart_remove', {'id': key}) }}">
-                            <button class="btn btn-danger">Remove</button>
-                            </a></td>
+                            <th>Id</th>
+                            <th>Aantal</th>
+                            <th>Afbeelding</th>
+                            <th>Prijs</th>
+                            <th>Totaal</th>
+                            <th>Add</th>
+                            <th>Delete</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+
+                        {% for key, item in cart %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ item }}</td>
+                                {% for row in product %}
+                                    {% if row.id == key %}
+                                        <td><img src="{{ asset('images/products/' ~ row.imageName) }}" alt="images" width="80px"></td>
+                                        <td>€{{ row.prijs | number_format(2) }}</td>
+                                        <td>€{{ (row.prijs * item) | number_format(2) }}</td>
+                                        {% set total = total + (row.prijs * item) %}
+                                    {% endif %}
+                                {% endfor %}
+                                <td><a href="{{ path('cart_add', {'id': key}) }}">
+                                        <button class="btn btn-success">Add</button>
+                                    </a></td>
+                                <td><a href="{{ path('cart_remove', {'id': key}) }}">
+                                        <button class="btn btn-danger">Remove</button>
+                                    </a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        {% endif %}
+        </ul>
+        <h4 class="right">Total in Cart = €{{ total | number_format(2) }}</h4>
     {% endif %}
-    </ul>
-    <h4 class="right">Total in Cart = €{{ total | number_format(2) }}</h4>
     <a href="{{ path('product_overview') }}">
         <button type="button" class="btn btn-info col-lg-2 right">Go on shopping!</button>
     </a>
-    <a href="{{ path('checkout') }}">
-        <button type="button" class="btn btn-success col-lg-2">Checkout!</button>
-    </a>
+    {% if cart is not empty %}
+        <a href="{{ path('checkout') }}">
+            <button type="button" class="btn btn-success col-lg-2">Checkout!</button>
+        </a>
+    {% endif %}
 {% endblock %}

@@ -19,6 +19,8 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="product_index", methods={"GET"})
      * @Security("is_granted('ROLE_ADMIN')")
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function index(ProductRepository $productRepository): Response
     {
@@ -28,6 +30,9 @@ class ProductController extends AbstractController
     /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      * @Security("is_granted('ROLE_ADMIN')")
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request): Response
     {
@@ -51,6 +56,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}", name="product_show", methods={"GET"})
+     * @param Product $product
+     * @return Response
      */
     public function show(Product $product): Response
     {
@@ -59,7 +66,9 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
-     * @throws \Exception
+     * @param Request $request
+     * @param Product $product
+     * @return Response
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Product $product): Response
@@ -81,6 +90,9 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Product $product
+     * @return Response
      */
     public function delete(Request $request, Product $product): Response
     {

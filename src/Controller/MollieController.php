@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/mollie")
- * @Security("is_granted('ROLE_ADMIN')")
  */
 class MollieController extends AbstractController
 {
@@ -25,6 +24,7 @@ class MollieController extends AbstractController
      * @Route("/", name="mollie_redirect")
      * @param BetalingRepository $betalingRepository
      * @return Response
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(BetalingRepository $betalingRepository)
     {
@@ -70,6 +70,7 @@ class MollieController extends AbstractController
             $betaling->setDescription($payment->description);
             $betaling->setStatus($payment->status);
             $betaling->setHook($payment->id);
+            $betaling->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($betaling);
@@ -108,6 +109,7 @@ class MollieController extends AbstractController
      * @Route("/payments/{orderId}", name="payments_show", methods={"GET"})
      * @param Betaling $betaling
      * @return Response
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function show(Betaling $betaling): Response
     {

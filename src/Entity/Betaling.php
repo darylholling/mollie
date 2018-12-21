@@ -36,6 +36,11 @@ class Betaling
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +101,25 @@ class Betaling
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+
+
     public function __toString()
     {
         return $this->getStatus();

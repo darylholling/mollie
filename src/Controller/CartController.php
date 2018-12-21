@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Factuur;
 use App\Entity\Orderregel;
 use App\Entity\Product;
-use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,6 +56,8 @@ class CartController extends Controller
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $cart = $session->get('cart', array());
 
+        //TODO zorgen dat aantal een invul veld wordt
+
         if ($product == NULL) {
             $this->get('session')->setFlash('notice', 'This product is not available');
             return $this->redirect($this->generateUrl('cart_index'));
@@ -101,11 +102,13 @@ class CartController extends Controller
             }
         }
         $session->clear();
-        return $this->redirectToRoute('product_overview');
+        return $this->redirectToRoute('molly_new');
     }
 
     /**
      * @Route("/remove/{id}", name="cart_remove")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function removeAction($id)
     {
@@ -116,12 +119,16 @@ class CartController extends Controller
         if (!$cart[$id]) {
             $this->redirect($this->generateUrl('cart_index'));
         }
+
+
         // check if the $id already exists in it.
         if (isset($cart[$id])) {
-            $cart[$id] = $cart[$id] - 1;
-            if ($cart[$id] < 1) {
+//      zorgt ervoor dat remove 1 record verwijderd
+//            $cart[$id] = $cart[$id] - 1;
+//            if ($cart[$id] < 1) {
+//      zorgt ervoor dat remove het gehele item [$id] uit de wagen gooit
                 unset($cart[$id]);
-            }
+//            }
         } else {
             return $this->redirect($this->generateUrl('cart_index'));
         }

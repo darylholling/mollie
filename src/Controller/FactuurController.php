@@ -17,6 +17,8 @@ class FactuurController extends AbstractController
 {
     /**
      * @Route("/", name="factuur_index", methods={"GET"})
+     * @param FactuurRepository $factuurRepository
+     * @return Response
      */
     public function index(FactuurRepository $factuurRepository): Response
     {
@@ -25,6 +27,9 @@ class FactuurController extends AbstractController
 
     /**
      * @Route("/new", name="factuur_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request): Response
     {
@@ -48,6 +53,8 @@ class FactuurController extends AbstractController
 
     /**
      * @Route("/{id}", name="factuur_show", methods={"GET"})
+     * @param Factuur $factuur
+     * @return Response
      */
     public function show(Factuur $factuur): Response
     {
@@ -56,6 +63,9 @@ class FactuurController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="factuur_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Factuur $factuur
+     * @return Response
      */
     public function edit(Request $request, Factuur $factuur): Response
     {
@@ -76,6 +86,9 @@ class FactuurController extends AbstractController
 
     /**
      * @Route("/{id}", name="factuur_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Factuur $factuur
+     * @return Response
      */
     public function delete(Request $request, Factuur $factuur): Response
     {
