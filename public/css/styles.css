@@ -177,3 +177,7 @@ input div .form-control {
 .overflow-hidden {
     overflow: hidden;
 }
+
+.pomschrijving{
+    margin: 40px 0;
+}
