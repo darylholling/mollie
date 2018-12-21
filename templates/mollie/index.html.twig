@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="text-center">Mollie overzicht</h1>
+    <div class="container">
+
+    <table id="myTable" class="table table-striped display">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>order_id</th>
+            <th>status</th>
+            <th>description</th>
+            <th>hook</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for betaling in betalings %}
+            <tr>
+                <td>{{ betaling.id }}</td>
+                <td>{{ betaling.orderId }}</td>
+                <td>{{ betaling.status }}</td>
+                <td>{{ betaling.description }}</td>
+                <td>{{ betaling.hook }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

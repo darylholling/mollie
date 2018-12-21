@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1 class="text-center">Product index</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Naam</th>
+                <th>Omschrijving</th>
+                <th>Prijs</th>
+                <th>ImageName</th>
+                {#<th>UpdatedAt</th>#}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.omschrijving }}</td>
+                <td>{{ product.prijs }}</td>
+                <td><img src="{{ asset('images/products/' ~ product.imageName) }}" alt="images" width="80px"></td>
+                {#<td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
+                <td>
+                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_new') }}">Create new</a>
+</div>
+
+{% endblock %}
