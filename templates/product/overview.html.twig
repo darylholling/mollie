@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/overview.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="h3">Product overview </h3>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 col-sm-6">
+                <div class="product-grid2 card">
+                    <div class="product-image2">
+                        <a href="{{ path('product_show', {'id': product.id }) }}">
+                            <img class="pic-1" src="{{ asset('images/products/' ~ product.imageName) }}">
+                            {#TODO implement second image#}
+                            <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-2.jpg">
+                        </a>
+                        <ul class="social">
+                            <li><a href="{{ path('product_show', {'id': product.id }) }}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                            {#<li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>#}
+                            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                        {#TODO add shopping cart#}
+                        <a class="add-to-cart" href="">+ Add To Cart</a>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="{{ path('product_show', {'id': product.id }) }}">{{ product.name }}</a></h3>
+                        <div class="price">€{{ product.prijs }}
+                            {#<span>$20.00</span>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <h1>No products found</h1>
+            {% endfor %}
+
+        </div>
+    </div>
+    <hr>
+{% endblock %}

@@ -128,7 +128,7 @@ class Product
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      * @throws \Exception
      */
-    public function setImageFile(?File $image = null): void
+    public function setImageFile(?File $image = null)
     {
         $this->imageFile = $image;
 

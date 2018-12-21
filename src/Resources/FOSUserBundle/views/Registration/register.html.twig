@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <body id="LoginForm">
+    <div class="container margintop">
+        <div class="login-form">
+            <div class="main-div">
+                <div class="panel">
+                    <h2>Registreer</h2>
+                </div>
+                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register reg'}}) }}
+                {{ form_widget(form, {'attr': {'class': 'form_control'}}) }}
+                <div>
+                    <input type="submit"
+                           class="btn btn-lg btn-primary btn-block subm"
+                           id="_submit"
+                           name="_submit"
+                           value="{{ 'Registreer'|trans }}"/>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}
