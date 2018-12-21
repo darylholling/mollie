@@ -6,6 +6,7 @@ use App\Entity\Factuur;
 use App\Entity\Orderregel;
 use App\Entity\Product;
 use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -73,6 +74,7 @@ class CartController extends Controller
     /**
      * @Route("/checkout", name="checkout")
      * @throws \Exception
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function checkoutAction()
     {
@@ -81,23 +83,13 @@ class CartController extends Controller
         $cart = $session->get('cart', array());
         // aanmaken factuur regel.
         $em = $this->getDoctrine()->getManager();
-        if (TRUE === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            $userAdress = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $this->getUser()->getId()));
-        } else {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-        // new UserAdress if no UserAdress found...
-        if (!$userAdress) {
-            $userAdress = new User();
-            $userAdress->setId($this->getUser()->getId());
-        }
         $factuur = new Factuur();
         $factuur->setTimestamp(new \DateTime("now"));
         $factuur->setUser($this->getUser());
         if (isset($cart)) {
             $em->persist($factuur);
             $em->flush();
-            // put basket in dbase
+            // put basket in database
             foreach ($cart as $id => $quantity) {
                 $regel = new Orderregel();
                 $regel->setFactuur($factuur);

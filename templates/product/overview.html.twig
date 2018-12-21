@@ -19,10 +19,10 @@
                         <ul class="social">
                             <li><a href="{{ path('product_show', {'id': product.id }) }}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                             {#<li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>#}
-                            <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="{{ path('cart_add', {'id': product.id}) }}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                         {#TODO add shopping cart#}
-                        <a class="add-to-cart" href="">+ Add To Cart</a>
+                        <a class="add-to-cart" href="{{ path('cart_add', {'id': product.id}) }}">+ Add To Cart</a>
                     </div>
                     <div class="product-content">
                         <h3 class="title"><a href="{{ path('product_show', {'id': product.id }) }}">{{ product.name }}</a></h3>
