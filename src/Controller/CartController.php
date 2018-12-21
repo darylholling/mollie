@@ -1,24 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: DarylHolling
- * Date: 21-12-2018
- * Time: 13:24
- */
 
 namespace App\Controller;
 
+use Symfony\Component\HttpKernel\Tests\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/cart")
  */
-class CartController
+class CartController extends Controller
 {
     /**
      * @Route("/", name="cart_index")
      */
-    public function index(){
+    public function index()
+    {
 
     }
 
