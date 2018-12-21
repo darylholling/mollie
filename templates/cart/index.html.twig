@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>SHOPPING-CART</h1>
+
+    <ul class="thumbnails">
+
+    {% if empty %}
+        <h5>Your shopping cart is empty.</h5>
+    {% endif %}
+    {% set cart = app.session.get('cart') %}
+
+
+    {% if product %}
+
+    {% endif %}
+{% endblock %}

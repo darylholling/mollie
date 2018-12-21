@@ -27,6 +27,15 @@ class Factuur
     private $timestamp;
 
 
+    /**
+     * Factuur constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        $this->timestamp = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
