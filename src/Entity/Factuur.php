@@ -26,6 +26,7 @@ class Factuur
      */
     private $timestamp;
 
+
     public function getId(): ?int
     {
         return $this->id;

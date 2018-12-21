@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22187d8c-0a4f-41a9-b966-446821e62aba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/fos_user.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/routes/fos_user.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/overview.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/confirmed.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/register.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/Registration/register_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Resources/FOSUserBundle/views/security/login.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/product/overview.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/molly.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/molly.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Orderregel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/products/5c1cbe8746746098914992.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Factuur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Factuur.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="119" selection-start-line="119" selection-end-line="119" />
+            <state relative-caret-position="473">
+              <caret line="116" selection-start-line="116" selection-end-line="116" />
               <folding>
                 <element signature="e#30#52#0#PHP" expanded="true" />
               </folding>
@@ -52,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" column="82" lean-forward="true" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
+              <caret line="14" column="82" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
               <folding>
                 <element signature="e#2664#2673#0#Twig" expanded="true" />
                 <element signature="e#2762#2775#0#Twig" expanded="true" />
@@ -79,14 +57,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/product/overview.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
+            <state relative-caret-position="510">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
                 <element signature="e#480#492#0#Twig" expanded="true" />
                 <element signature="e#820#832#0#Twig" expanded="true" />
                 <element signature="e#1440#1452#0#Twig" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Factuur.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="433">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Orderregel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -172,6 +168,7 @@
         <option value="$PROJECT_DIR$/src/Controller/CartController.php" />
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Factuur.php" />
       </list>
     </option>
   </component>
@@ -313,17 +310,6 @@
             <path>
               <item name="molly" type="b2602c69:ProjectViewProjectNode" />
               <item name="molly" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="molly" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="molly" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -336,40 +322,7 @@
               <item name="molly" type="b2602c69:ProjectViewProjectNode" />
               <item name="molly" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="molly" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="molly" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="molly" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="Registration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
-              <item name="molly" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="security" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="molly" type="b2602c69:ProjectViewProjectNode" />
@@ -391,6 +344,27 @@
               <item name="molly" type="b2602c69:ProjectViewProjectNode" />
               <item name="molly" type="462c0819:PsiDirectoryNode" />
               <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="molly" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="symfony" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="molly" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="symfony" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="molly" type="b2602c69:ProjectViewProjectNode" />
+              <item name="molly" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="symfony" type="462c0819:PsiDirectoryNode" />
+              <item name="validator" type="462c0819:PsiDirectoryNode" />
+              <item name="Constraints" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="molly" type="b2602c69:ProjectViewProjectNode" />
@@ -561,12 +535,20 @@
       <option name="presentableId" value="Default" />
       <updated>1545298908730</updated>
       <workItem from="1545298910251" duration="26346000" />
-      <workItem from="1545383022214" duration="11638000" />
+      <workItem from="1545383022214" duration="12537000" />
     </task>
+    <task id="LOCAL-00001" summary="overview page">
+      <created>1545395554638</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1545395554638</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37984000" />
+    <option name="totallyTimeSpent" value="38883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -596,28 +578,11 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="overview page" />
+    <option name="LAST_COMMIT_MESSAGE" value="overview page" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/routing/Annotation/Route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/date/date.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="797" column="9" selection-start-line="797" selection-start-column="9" selection-end-line="797" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="659" column="9" selection-start-line="659" selection-start-column="9" selection-end-line="659" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -829,16 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-          <folding>
-            <element signature="e#30#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Registration/register_content.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -930,19 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/product/overview.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#480#492#0#Twig" expanded="true" />
-            <element signature="e#820#832#0#Twig" expanded="true" />
-            <element signature="e#1440#1452#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -982,13 +924,57 @@
     <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="82" lean-forward="true" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
+          <caret line="14" column="82" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
           <folding>
             <element signature="e#2664#2673#0#Twig" expanded="true" />
             <element signature="e#2762#2775#0#Twig" expanded="true" />
             <element signature="e#2642#2666#0#Twig" expanded="true" />
             <element signature="e#2771#2794#0#Twig" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="116" selection-start-line="116" selection-end-line="116" />
+          <folding>
+            <element signature="e#30#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/product/overview.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#480#492#0#Twig" expanded="true" />
+            <element signature="e#820#832#0#Twig" expanded="true" />
+            <element signature="e#1440#1452#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/validator/Constraints/DateTime.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Orderregel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Factuur.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
         </state>
       </provider>
     </entry>
