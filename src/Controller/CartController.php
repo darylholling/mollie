@@ -127,7 +127,7 @@ class CartController extends Controller
 //            $cart[$id] = $cart[$id] - 1;
 //            if ($cart[$id] < 1) {
 //      zorgt ervoor dat remove het gehele item [$id] uit de wagen gooit
-                unset($cart[$id]);
+            unset($cart[$id]);
 //            }
         } else {
             return $this->redirect($this->generateUrl('cart_index'));

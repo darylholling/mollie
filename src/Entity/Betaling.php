@@ -41,6 +41,9 @@ class Betaling
      */
     private $user;
 
+//    TODO Zorgen dat betaling & factuur gekoppeld worden.
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -117,8 +120,6 @@ class Betaling
     {
         $this->user = $user;
     }
-
-
 
     public function __toString()
     {

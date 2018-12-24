@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class MollieController extends AbstractController
 {
     /**
-     * @Route("/", name="mollie_redirect")
+     * @Route("/", name="mollie_index")
      * @param BetalingRepository $betalingRepository
      * @return Response
      * @Security("is_granted('ROLE_ADMIN')")

@@ -22,7 +22,7 @@
                 {% for factuur in factuur %}
                     <tr>
                         <td>{{ factuur.id }}</td>
-                        <td>{{ factuur.timestamp ? factuur.timestamp|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ factuur.timestamp ? factuur.timestamp|date('d-m-Y @ H:i:s') : '' }}</td>
                         <td>{{ factuur.user }}</td>
                         <td>
                             <a href="{{ path('factuur_show', {'id': factuur.id}) }}" class="btn btn-info">show</a>
