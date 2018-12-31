@@ -37,6 +37,11 @@ class Betaling
     private $status;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Factuur")
+     */
+    private $factuur;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
@@ -108,6 +113,22 @@ class Betaling
     /**
      * @return mixed
      */
+    public function getFactuur()
+    {
+        return $this->factuur;
+    }
+
+    /**
+     * @param mixed $factuur
+     */
+    public function setFactuur($factuur): void
+    {
+        $this->factuur = $factuur;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getUser()
     {
         return $this->user;
@@ -121,8 +142,5 @@ class Betaling
         $this->user = $user;
     }
 
-    public function __toString()
-    {
-        return $this->getStatus();
-    }
+
 }

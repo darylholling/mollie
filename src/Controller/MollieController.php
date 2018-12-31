@@ -70,6 +70,8 @@ class MollieController extends AbstractController
             $betaling->setDescription($payment->description);
             $betaling->setStatus($payment->status);
             $betaling->setHook($payment->id);
+//            TODO setfacuut naar factuurid
+            $betaling->setFactuur('not yet defined');
             $betaling->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
