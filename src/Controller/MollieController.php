@@ -35,6 +35,7 @@ class MollieController extends AbstractController
 
     /**
      * @Route("/new", name="molly_new", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws ApiException
      * @throws IncompatiblePlatform
      */
@@ -51,6 +52,9 @@ class MollieController extends AbstractController
         $redirectUrl = $this->generateUrl('payments_show', [
             'orderId' => $orderId
         ], UrlGeneratorInterface::ABSOLUTE_URL);
+        $webhookUrl = $this->generateUrl('hook_show', [
+
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $payment = $mollie->payments->create([
             "amount" => [
@@ -59,7 +63,8 @@ class MollieController extends AbstractController
             ],
             "description" => "My first payment" . $orderId,
             "redirectUrl" => $redirectUrl,
-            "webhookUrl" => "https://ad46fabe.ngrok.io/mollie/webhook",
+//            "webhookUrl" => $webhookUrl,
+            "webhookUrl" => "https://c8f020e2.ngrok.io/mollie/webhook",
             "metadata" => [
                 "order_id" => $orderId,
             ],
@@ -71,7 +76,7 @@ class MollieController extends AbstractController
             $betaling->setStatus($payment->status);
             $betaling->setHook($payment->id);
 //            TODO setfacuut naar factuurid
-            $betaling->setFactuur('not yet defined');
+            $betaling->setFactuur(1);
             $betaling->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();

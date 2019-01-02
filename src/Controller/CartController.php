@@ -102,7 +102,9 @@ class CartController extends Controller
             }
         }
         $session->clear();
-        return $this->redirectToRoute('molly_new');
+        return $this->redirectToRoute('molly_new', array(
+            'id' => $factuur->getId()
+        ));
     }
 
     /**
