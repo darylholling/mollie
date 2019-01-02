@@ -48,6 +48,11 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=15)
      */
     private $phoneNumber;
+    /**
+     * @ORM\Column(type="integer", length=5)
+     */
+    private $huisNr;
+
 
 
     public function __construct()
@@ -150,6 +155,22 @@ class User extends BaseUser
     public function setZipCode($zipCode): void
     {
         $this->zipCode = $zipCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHuisNr()
+    {
+        return $this->huisNr;
+    }
+
+    /**
+     * @param mixed $huisNr
+     */
+    public function setHuisNr($huisNr): void
+    {
+        $this->huisNr = $huisNr;
     }
 
 

@@ -17,18 +17,16 @@
                     <div class="col-md-6">
                         <address>
                             <strong>Billed To:</strong><br>
-                            {#TODO username aanpassen naar gebruiker voornaam & achternaam#}
-                            {{ factuur.user.username|capitalize }}<br>
+                            {{ factuur.user.firstName|capitalize }}  {{ factuur.user.lastName|capitalize }}<br>
+                            {{ factuur.user.phoneNumber }}<br>
                             {{ factuur.user.email|capitalize }}
                         </address>
                     </div>
                     <div class="col-md-6 text-right">
                         <address>
-                            {#TODO user adress hier plaatsen#}
-                            <strong>Shipped To:</strong><br>
-                            206/3 Signet hub near akshar chowk <br>
-                            Vadodara, Gujratn<br>
-                            India, 390023
+                            <strong>Bezorgadres</strong><br>
+                            {{ factuur.user.adress|capitalize }} {{ factuur.user.huisNr }} <br>
+                            {{ factuur.user.zipCode }}, {{ factuur.user.city|capitalize }}
                         </address>
                     </div>
                 </div>
