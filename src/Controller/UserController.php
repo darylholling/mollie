@@ -41,7 +41,7 @@ class UserController extends AbstractController
             return $this->render('user/index.html.twig', ['users' => $users]);
         } elseif ($this->security->isGranted('ROLE_USER')) {
             return $this->render('user/show.html.twig', ['user' => $this->getUser()]);
-        } else{
+        } else {
             return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
         }
     }
@@ -53,8 +53,10 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_USER') && $user == $this->getUser()) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return $this->render('user/show.html.twig', ['user' => $user]);
+        } elseif ($this->security->isGranted('ROLE_USER') && $user == $this->getUser()) {
+            return $this->render('@FOSUser/Profile/show.html.twig');
         } else {
             return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
         }
