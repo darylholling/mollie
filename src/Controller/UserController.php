@@ -10,7 +10,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,6 +63,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @\Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
      * @param Request $request
      * @param User $user
@@ -73,29 +73,17 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-        if ($this->security->isGranted('ROLE_ADMIN')) {
-            if ($form->isSubmitted() && $form->isValid()) {
-                $this->getDoctrine()->getManager()->flush();
-                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-            }
-            return $this->render('user/edit.html.twig', [
-                'user' => $user,
-                'form' => $form->createView(),
-            ]);
-        } elseif ($this->security->isGranted('ROLE_USER') && $user == $this->getUser()) {
-            if ($form->isSubmitted() && $form->isValid()) {
-                $this->getDoctrine()->getManager()->flush();
-                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-            }
-            return $this->render('@FOSUser/Profile/show.html.twig', [
-                'user' => $user,
-                'form' => $form->createView(),
-            ]);
-        } else {
-            return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
 
     }
+
 
     /**
      * @\Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("is_granted('ROLE_ADMIN')")
