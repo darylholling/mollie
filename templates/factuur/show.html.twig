@@ -1,26 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Factuur{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/invoice.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>Factuur</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ factuur.id }}</td>
-            </tr>
-            <tr>
-                <th>Timestamp</th>
-                <td>{{ factuur.timestamp ? factuur.timestamp|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="invoice-title">
+                    <h2>Factuur</h2>
+                    <h3 class="pull-right">Order Id # {{ factuur.id }}</h3>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <address>
+                            <strong>Billed To:</strong><br>
+                            {{ factuur.user.username|capitalize }}<br>
+                            {{ factuur.user.email|capitalize }}
+                        </address>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <address>
+                            <strong>Shipped To:</strong><br>
+                            206/3 Signet hub near akshar chowk <br>
+                            Vadodara, Gujratn<br>
+                            India, 390023
+                        </address>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <address>
+                            <strong>Payment Method:</strong><br>
+                            <br>
 
-    <a href="{{ path('factuur_index') }}">back to list</a>
+                        </address>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <address>
+                            <strong>Order Date:</strong><br>
+                            {{ factuur.timestamp|date('d-m-Y') }}<br><br>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('factuur_edit', {'id': factuur.id}) }}">edit</a>
-
-    {{ include('factuur/_delete_form.html.twig') }}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Order summary</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <td><strong>Product</strong></td>
+                                    <td class="text-center"><strong>Aantal</strong></td>
+                                    <td class="text-center"><strong>Prijs</strong></td>
+                                    <td class="text-right"><strong>Totaal</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% set gentot = 0 %}
+                                {% for regel in regels %}
+                                    <tr>
+                                        <td>{{ regel.product }}</td>
+                                        <td class="text-center">{{ regel.aantal }}</td>
+                                        {% set totaal = regel.aantal %}
+                                        <td class="text-center">
+                                            {% for product in products %}
+                                                {% set p = regel.product %}
+                                                {% if p.id == product.id %}
+                                                    €{{ product.prijs|number_format(2) }}
+                                                    {% set totaal = (totaal * product.prijs) %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td class="text-right">€{{ totaal|number_format(2) }}</td>
+                                        {% set gentot = (gentot + totaal) %}
+                                    </tr>
+                                {% endfor %}
+                                {#bezorgkosten gratis vanaf 50 euro#}
+                                {% if gentot < 50 %}
+                                    {% set bezorgkosten = 5 %}
+                                {% else %}
+                                    {% set bezorgkosten = 0 %}
+                                {% endif %}
+                                {% set gentot = (gentot + bezorgkosten) %}
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Subtotaal</strong></td>
+                                    <td class="thick-line text-right">€{{ gentot|number_format(2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Bezorgkosten</strong></td>
+                                    <td class="no-line text-right">€{{ bezorgkosten|number_format(2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Totaal</strong></td>
+                                    <td class="no-line text-right">€{{ gentot|number_format(2) }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

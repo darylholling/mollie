@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Factuur;
+use App\Entity\Orderregel;
+use App\Entity\Product;
 use App\Form\FactuurType;
 use App\Repository\FactuurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,10 +75,21 @@ class FactuurController extends AbstractController
      */
     public function show(Factuur $factuur): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $regels = $em->getRepository(Orderregel::class)->findBy(['factuur' => $factuur->getId()]);
+        $products = $em->getRepository(Product::class)->findAll();
         if ($this->isGranted("ROLE_ADMIN")) {
-            return $this->render('factuur/show.html.twig', ['factuur' => $factuur]);
+            return $this->render('factuur/show.html.twig', [
+                'factuur' => $factuur,
+                'regels' => $regels,
+                'products' => $products,
+            ]);
         } elseif ($this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
-            return $this->render('factuur/show.html.twig', ['factuur' => $factuur]);
+            return $this->render('factuur/show.html.twig', [
+                'factuur' => $factuur,
+                'regels' => $regels,
+                'products' => $products,
+            ]);
         } else {
             return new Response('not ok', 404);
         }

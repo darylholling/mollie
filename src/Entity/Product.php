@@ -164,4 +164,8 @@ class Product
         return $this->imageSize;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
