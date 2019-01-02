@@ -1,29 +1,9 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<div class="container">
-    <div class="row">
-        {% include "usernav_base.html.twig" %}
 
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Bewerk accountinformatie</h4>
-                            <hr>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-                            {{ form_widget(form) }}
-                            <div>
-                                <input type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
-                            </div>
-                            {{ form_end(form) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+{{ form_widget(form) }}
+<div>
+    <input type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
 </div>
+{{ form_end(form) }}
+

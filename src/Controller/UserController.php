@@ -71,20 +71,30 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
-        if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_USER') && $user == $this->getUser()) {
-            $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+            }
+            return $this->render('user/edit.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        } elseif ($this->security->isGranted('ROLE_USER') && $user == $this->getUser()) {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+            }
+            return $this->render('@FOSUser/Profile/show.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
         } else {
             return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
         }
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-        }
-        return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+
     }
 
     /**
