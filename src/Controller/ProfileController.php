@@ -31,20 +31,20 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="profile_index", methods="GET|POST")
+     * @Route("/{id}", name="profile_edit", methods="GET|POST")
      * @param Request $request
      * @param User $user
      * @return Response
      * @ParamConverter("User", class="App\Entity\User")
      */
-    public function index(Request $request, User $user): Response
+    public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 //        if ($this->security->isGranted('ROLE_USER' && $user == $this->getUser())) {
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+            return $this->redirectToRoute('profile_edit', ['id' => $user->getId()]);
         }
         return $this->render('@FOSUser/Profile/show.html.twig', [
             'user' => $user,
