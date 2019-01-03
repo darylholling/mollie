@@ -64,7 +64,7 @@ class MollieController extends AbstractController
             "description" => "My first payment" . $orderId,
             "redirectUrl" => $redirectUrl,
 //            "webhookUrl" => $webhookUrl,
-            "webhookUrl" => "https://c8f020e2.ngrok.io/mollie/webhook",
+            "webhookUrl" => "https://d17b6858.ngrok.io/mollie/webhook",
             "metadata" => [
                 "order_id" => $orderId,
             ],
@@ -75,8 +75,8 @@ class MollieController extends AbstractController
             $betaling->setDescription($payment->description);
             $betaling->setStatus($payment->status);
             $betaling->setHook($payment->id);
-//            TODO setfacuut naar factuurid
-            $betaling->setFactuur(1);
+//            TODO setfacuut naar factuurid van desbetreffende factuur
+//            $betaling->setFactuur();
             $betaling->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();

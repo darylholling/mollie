@@ -19,6 +19,7 @@
         <a class="py-2 d-none d-md-inline-block" href="{{ path('factuur_index') }}">Facturen</a>
         <a class="py-2 d-none d-md-inline-block" href="{{ path('cart_index') }}">Cart</a>
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <a class="py-2 d-none d-md-inline-block" href="{{ path('profile_edit', {'id': app.user.id}) }}">Mijn account</a>
             <a class="py-2 d-none d-md-inline-block" href="{{ path('fos_user_security_logout') }}">Logout</a>
         {% else %}
             <a class="py-2 d-none d-md-inline-block" href="{{ path('fos_user_security_login') }}">Login</a>
