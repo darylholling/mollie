@@ -7,6 +7,8 @@
             <th>Id</th>
             <th>Timestamp</th>
             <th>User</th>
+            <th>Bedrag</th>
+            <th>Status</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -16,6 +18,8 @@
                 <td>{{ factuur.id }}</td>
                 <td>{{ factuur.timestamp ? factuur.timestamp|date('d-m-Y @ H:i:s') : '' }}</td>
                 <td>{{ factuur.user }}</td>
+                <td>{{ factuur.betaald }}</td>
+                <td>{{ factuur.betaald }}</td>
                 <td>
                     <a href="{{ path('factuur_show', {'id': factuur.id}) }}" class="btn btn-info">show</a>
                     {% if is_granted("ROLE_ADMIN") %}

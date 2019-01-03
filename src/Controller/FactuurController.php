@@ -50,6 +50,7 @@ class FactuurController extends AbstractController
     public function new(Request $request): Response
     {
         $factuur = new Factuur();
+
         $form = $this->createForm(FactuurType::class, $factuur);
         $form->handleRequest($request);
 

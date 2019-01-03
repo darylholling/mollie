@@ -87,6 +87,7 @@ class CartController extends Controller
         $factuur = new Factuur();
         $factuur->setTimestamp(new \DateTime("now"));
         $factuur->setUser($this->getUser());
+
         if (isset($cart)) {
             $em->persist($factuur);
             $em->flush();

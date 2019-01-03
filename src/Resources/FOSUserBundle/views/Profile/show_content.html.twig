@@ -1,19 +1,40 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="fos_user_user_show">
-    <div class="fos_user_user_show">
-        <h1>User</h1>
         <table class="table table-striped">
             <tbody>
             <tr>
                 <th>Username</th>
-                {#<td>{{ user.username }}</td>#}
+                <td>{{ user.username }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                {#<td>{{ user.email }}</td>#}
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Voornaam</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Achternaam</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Adress & huisnummer</th>
+                <td>{{ user.adress }} {{ user.huisNr }}</td>
+            </tr>
+            <tr>
+                <th>Postcode</th>
+                <td>{{ user.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>Woonplaats</th>
+                <td>{{ user.city }}</td>
+            </tr>
+            <tr>
+                <th>Telefoonnummer</th>
+                <td>{{ user.phoneNumber }}</td>
             </tr>
             </tbody>
         </table>
-    </div>
 </div>

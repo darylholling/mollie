@@ -98,5 +98,9 @@ class Betaling
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->getStatus();
+    }
 
 }

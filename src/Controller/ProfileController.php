@@ -36,10 +36,11 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/", name="profile_index", methods={"GET"})
+     * @return Response
      */
     public function index(): Response
     {
-        return $this->render('@FOSUser/Profile/show.html.twig');
+        return $this->render('@FOSUser/Profile/show.html.twig', ['user' => $this->getUser()]);
     }
 
     /**
