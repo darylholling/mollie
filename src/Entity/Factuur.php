@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +33,7 @@ class Factuur
     private $betaald;
 
 
+
     /**
      * Factuur constructor.
      * @throws \Exception
@@ -39,6 +41,7 @@ class Factuur
     public function __construct()
     {
         $this->timestamp = new \DateTime();
+        $this->regels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,5 +88,10 @@ class Factuur
     {
         $this->betaald = $betaald;
     }
+
+
+
+
+
 
 }

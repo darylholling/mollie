@@ -43,6 +43,7 @@ class FactuurController extends AbstractController
     }
 
 
+
     /**
      * @Route("/new", name="factuur_new", methods={"GET","POST"})
      * @param Request $request
@@ -79,7 +80,13 @@ class FactuurController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $regels = $em->getRepository(Orderregel::class)->findBy(['factuur' => $factuur->getId()]);
         $products = $em->getRepository(Product::class)->findAll();
-        if ($this->isGranted("ROLE_ADMIN") || $this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
+        if ($this->isGranted("ROLE_ADMIN")) {
+            return $this->render('factuur/show.html.twig', [
+                'factuur' => $factuur,
+                'regels' => $regels,
+                'products' => $products,
+            ]);
+        } elseif ($this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
             return $this->render('factuur/show.html.twig', [
                 'factuur' => $factuur,
                 'regels' => $regels,
