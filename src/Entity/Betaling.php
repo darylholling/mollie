@@ -36,17 +36,6 @@ class Betaling
      */
     private $status;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Factuur")
-     */
-    private $factuur;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     */
-    private $user;
-
-//    TODO Zorgen dat betaling & factuur gekoppeld worden.
 
 
     public function getId(): ?int
@@ -109,38 +98,5 @@ class Betaling
 
         return $this;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getFactuur()
-    {
-        return $this->factuur;
-    }
-
-    /**
-     * @param mixed $factuur
-     */
-    public function setFactuur($factuur): void
-    {
-        $this->factuur = $factuur;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param mixed $user
-     */
-    public function setUser($user): void
-    {
-        $this->user = $user;
-    }
-
 
 }

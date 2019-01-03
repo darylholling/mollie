@@ -43,7 +43,6 @@ class FactuurController extends AbstractController
     }
 
 
-
     /**
      * @Route("/new", name="factuur_new", methods={"GET","POST"})
      * @param Request $request
@@ -80,20 +79,14 @@ class FactuurController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $regels = $em->getRepository(Orderregel::class)->findBy(['factuur' => $factuur->getId()]);
         $products = $em->getRepository(Product::class)->findAll();
-        if ($this->isGranted("ROLE_ADMIN")) {
-            return $this->render('factuur/show.html.twig', [
-                'factuur' => $factuur,
-                'regels' => $regels,
-                'products' => $products,
-            ]);
-        } elseif ($this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
+        if ($this->isGranted("ROLE_ADMIN") || $this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
             return $this->render('factuur/show.html.twig', [
                 'factuur' => $factuur,
                 'regels' => $regels,
                 'products' => $products,
             ]);
         } else {
-            return new Response('not ok', 404);
+            return $this->render('message/error.html.twig');
         }
     }
 
@@ -108,7 +101,7 @@ class FactuurController extends AbstractController
         if ($this->security->isGranted('ROLE_ADMIN') || $this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
             $form = $this->createForm(FactuurType::class, $factuur);
         } else {
-            return new Response('not ok', 404);
+            return $this->render('message/error.html.twig');
 
         }
         $form->handleRequest($request);
@@ -140,7 +133,7 @@ class FactuurController extends AbstractController
                 $entityManager->flush();
             }
         } else {
-            return new Response('not ok', 404);
+            return $this->render('message/error.html.twig');
         }
 
         return $this->redirectToRoute('factuur_index');

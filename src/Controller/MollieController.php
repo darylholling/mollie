@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Betaling;
+use App\Entity\Factuur;
+use App\Entity\Orderregel;
 use App\Repository\BetalingRepository;
+use App\Repository\FactuurRepository;
 use Mollie\Api\Exceptions\ApiException;
 use Mollie\Api\Exceptions\IncompatiblePlatform;
 use Mollie\Api\MollieApiClient;
@@ -56,6 +59,7 @@ class MollieController extends AbstractController
 
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
+
         $payment = $mollie->payments->create([
             "amount" => [
                 "currency" => "EUR",
@@ -75,9 +79,6 @@ class MollieController extends AbstractController
             $betaling->setDescription($payment->description);
             $betaling->setStatus($payment->status);
             $betaling->setHook($payment->id);
-//            TODO setfacuut naar factuurid van desbetreffende factuur
-//            $betaling->setFactuur();
-            $betaling->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($betaling);
@@ -106,10 +107,11 @@ class MollieController extends AbstractController
         $betaling = $this->getDoctrine()
             ->getRepository(Betaling::class)
             ->findOneBy(['hook' => $payment->id]);
+
         $betaling->setStatus($payment->status);
         $em->flush();
 
-        return new Response('OK', 200);
+        return $this->render('message/error.html.twig');
     }
 
     /**
@@ -143,7 +145,7 @@ class MollieController extends AbstractController
                 );
                 break;
             default:
-                return new Response('OK', 200);
+                return $this->render('message/error.html.twig');
         }
     }
 }

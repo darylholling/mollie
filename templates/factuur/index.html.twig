@@ -7,9 +7,7 @@
         {% if not factuur %}
             <h1>Geen facturen</h1>
         {% else %}
-            {#{% if  %}#}
-                <h1 class="text-center">Facturen overzicht</h1>
-            {#{% endif %}#}
+            <h1 class="text-center">Facturen overzicht</h1>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -27,7 +25,10 @@
                         <td>{{ factuur.user }}</td>
                         <td>
                             <a href="{{ path('factuur_show', {'id': factuur.id}) }}" class="btn btn-info">show</a>
-                            <a href="{{ path('factuur_edit', {'id': factuur.id}) }}" class="btn btn-primary">edit</a>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <a href="{{ path('factuur_edit', {'id': factuur.id}) }}"
+                                   class="btn btn-primary">edit</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}

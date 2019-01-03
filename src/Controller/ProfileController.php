@@ -8,6 +8,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Factuur;
+use App\Entity\Orderregel;
+use App\Entity\Product;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\FactuurRepository;
@@ -47,13 +50,13 @@ class ProfileController extends AbstractController
                 $this->getDoctrine()->getManager()->flush();
                 return $this->redirectToRoute('profile_edit', ['id' => $user->getId()]);
             }
-            return $this->render('@FOSUser/Profile/show.html.twig', [
+            return $this->render('Profile/show.html.twig', [
                 'user' => $user,
                 'form' => $form->createView(),
             ]);
         } else {
 //      TODO zorgen dat hij op eigen profiel komt
-//        return $this->redirectToRoute('profile_edit', ['id' => $user->getId()]);
+//      return $this->redirectToRoute('profile_edit', ['id' => $user->getId()]);
             return $this->render('message/error.html.twig');
         }
     }
@@ -66,9 +69,31 @@ class ProfileController extends AbstractController
     public function index(FactuurRepository $factuurRepository): Response
     {
         if ($this->isGranted("ROLE_ADMIN")) {
-            return $this->render('factuur/profile.html.twig', ['factuur' => $factuurRepository->findAll()]);
+            return $this->render('profile/factuur.html.twig', ['factuur' => $factuurRepository->findAll()]);
         } elseif ($this->isGranted("ROLE_USER")) {
-            return $this->render('factuur/profile.html.twig', ['factuur' => $factuurRepository->findBy(['user' => $this->getUser()])]);
+            return $this->render('profile/factuur.html.twig', ['factuur' => $factuurRepository->findBy(['user' => $this->getUser()])]);
+        } else {
+            return $this->render('message/error.html.twig');
+        }
+    }
+
+
+    /**
+     * @Route("/factuur/{id}", name="factuur_show", methods={"GET"})
+     * @param Factuur $factuur
+     * @return Response
+     */
+    public function show(Factuur $factuur): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $regels = $em->getRepository(Orderregel::class)->findBy(['factuur' => $factuur->getId()]);
+        $products = $em->getRepository(Product::class)->findAll();
+        if ($this->isGranted("ROLE_ADMIN") || $this->security->isGranted('ROLE_USER') && $factuur->getUser() == $this->getUser()) {
+            return $this->render('profile/factuurshow.html.twig', [
+                'factuur' => $factuur,
+                'regels' => $regels,
+                'products' => $products,
+            ]);
         } else {
             return $this->render('message/error.html.twig');
         }

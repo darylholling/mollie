@@ -26,6 +26,11 @@ class Factuur
      */
     private $timestamp;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Betaling")
+     */
+    private $betaald;
+
 
     /**
      * Factuur constructor.
@@ -64,4 +69,21 @@ class Factuur
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBetaald()
+    {
+        return $this->betaald;
+    }
+
+    /**
+     * @param mixed $betaald
+     */
+    public function setBetaald($betaald): void
+    {
+        $this->betaald = $betaald;
+    }
+
 }

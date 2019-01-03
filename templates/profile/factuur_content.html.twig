@@ -1,0 +1,34 @@
+{% if not factuur %}
+    <h1>Geen facturen</h1>
+{% else %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Timestamp</th>
+            <th>User</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for factuur in factuur %}
+            <tr>
+                <td>{{ factuur.id }}</td>
+                <td>{{ factuur.timestamp ? factuur.timestamp|date('d-m-Y @ H:i:s') : '' }}</td>
+                <td>{{ factuur.user }}</td>
+                <td>
+                    <a href="{{ path('factuur_show', {'id': factuur.id}) }}" class="btn btn-info">show</a>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a href="{{ path('factuur_edit', {'id': factuur.id}) }}"
+                           class="btn btn-primary">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
