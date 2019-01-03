@@ -35,6 +35,14 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * @Route("/", name="profile_index", methods={"GET"})
+     */
+    public function index(): Response
+    {
+        return $this->render('@FOSUser/Profile/show.html.twig');
+    }
+
+    /**
      * @Route("/{id}/update", name="profile_edit", methods="GET|POST")
      * @param Request $request
      * @param User $user
@@ -50,7 +58,7 @@ class ProfileController extends AbstractController
                 $this->getDoctrine()->getManager()->flush();
                 return $this->redirectToRoute('profile_edit', ['id' => $user->getId()]);
             }
-            return $this->render('Profile/show.html.twig', [
+            return $this->render('profile/adresboek.html.twig', [
                 'user' => $user,
                 'form' => $form->createView(),
             ]);
@@ -66,7 +74,7 @@ class ProfileController extends AbstractController
      * @param FactuurRepository $factuurRepository
      * @return Response
      */
-    public function index(FactuurRepository $factuurRepository): Response
+    public function factuurindex(FactuurRepository $factuurRepository): Response
     {
         if ($this->isGranted("ROLE_ADMIN")) {
             return $this->render('profile/factuur.html.twig', ['factuur' => $factuurRepository->findAll()]);
@@ -79,11 +87,11 @@ class ProfileController extends AbstractController
 
 
     /**
-     * @Route("/factuur/{id}", name="factuur_show", methods={"GET"})
+     * @Route("/factuur/{id}", name="profile_factuur_show", methods={"GET"})
      * @param Factuur $factuur
      * @return Response
      */
-    public function show(Factuur $factuur): Response
+    public function factuurshow(Factuur $factuur): Response
     {
         $em = $this->getDoctrine()->getManager();
         $regels = $em->getRepository(Orderregel::class)->findBy(['factuur' => $factuur->getId()]);

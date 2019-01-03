@@ -1,8 +1,19 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="fos_user_user_show">
-    <h1 class="text-center">Update Profile</h1>
-    <div class="container">
-        {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="fos_user_user_show">
+        <h1>User</h1>
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th>Username</th>
+                {#<td>{{ user.username }}</td>#}
+            </tr>
+            <tr>
+                <th>Email</th>
+                {#<td>{{ user.email }}</td>#}
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>

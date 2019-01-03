@@ -25,7 +25,6 @@ class FactuurController extends AbstractController
         $this->security = $security;
     }
 
-
     /**
      * @Route("/", name="factuur_index", methods={"GET"})
      * @param FactuurRepository $factuurRepository
@@ -41,8 +40,6 @@ class FactuurController extends AbstractController
             return $this->render('message/error.html.twig');
         }
     }
-
-
 
     /**
      * @Route("/new", name="factuur_new", methods={"GET","POST"})
