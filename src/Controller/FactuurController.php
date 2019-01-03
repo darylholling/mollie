@@ -38,9 +38,11 @@ class FactuurController extends AbstractController
         } elseif ($this->isGranted("ROLE_USER")) {
             return $this->render('factuur/index.html.twig', ['factuur' => $factuurRepository->findBy(['user' => $this->getUser()])]);
         } else {
-            return new Response('not ok', 404);
+            return $this->render('message/error.html.twig');
         }
     }
+
+
 
     /**
      * @Route("/new", name="factuur_new", methods={"GET","POST"})

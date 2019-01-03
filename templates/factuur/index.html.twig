@@ -7,8 +7,9 @@
         {% if not factuur %}
             <h1>Geen facturen</h1>
         {% else %}
-            <h1 class="text-center">Facturen overzicht</h1>
-
+            {#{% if  %}#}
+                <h1 class="text-center">Facturen overzicht</h1>
+            {#{% endif %}#}
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -38,6 +39,5 @@
             </table>
         {% endif %}
 
-        {#<a href="{{ path('factuur_new') }}" class="btn btn-success">Create new</a>#}
     </div>
 {% endblock %}

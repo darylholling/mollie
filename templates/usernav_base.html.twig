@@ -1,8 +1,18 @@
 <div class="col-md-3 ">
     <div class="list-group ">
         <a href="{{ path('profile_edit', {'id': app.user.id}) }}" class="list-group-item list-group-item-action active">Dashboard</a>
-        <a href="{{ path('fos_user_profile_edit') }}" class="list-group-item list-group-item-action">Accountinformatie</a>
+        <a href="{{ path('fos_user_profile_edit') }}"
+           class="list-group-item list-group-item-action">Accountinformatie</a>
         <a href="#" class="list-group-item list-group-item-action">Adresboek</a>
-        <a href="{{ path('factuur_index') }}" class="list-group-item list-group-item-action">Mijn bestellingen</a>
+        <a href="{{ path('profile_factuur') }}" class="list-group-item list-group-item-action">Mijn bestellingen</a>
     </div>
 </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script>
+    {#TODO zorgen dat de active werkt op de menu items#}
+    $(".list-group-item .list-group-item-action").on("click", function () {
+        $(".list-group-item").find(".active").removeClass("active");
+        $(this).addClass("active");
+    });
+</script>
