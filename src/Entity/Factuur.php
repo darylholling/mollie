@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,7 +31,7 @@ class Factuur
      */
     private $betaald;
 
-    protected $orderregels;
+
 
     /**
      * Factuur constructor.
@@ -41,7 +40,6 @@ class Factuur
     public function __construct()
     {
         $this->timestamp = new \DateTime();
-        $this->orderregels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,12 +87,9 @@ class Factuur
         $this->betaald = $betaald;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getOrderregels(): ArrayCollection
+    public function __toString()
     {
-        return $this->orderregels;
+        return $this->getId() . ' ' . $this->getUser();
     }
 
 
