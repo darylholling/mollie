@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Betaling;
-use App\Entity\Factuur;
-use App\Entity\Orderregel;
 use App\Repository\BetalingRepository;
-use App\Repository\FactuurRepository;
 use Mollie\Api\Exceptions\ApiException;
 use Mollie\Api\Exceptions\IncompatiblePlatform;
 use Mollie\Api\MollieApiClient;
@@ -59,7 +56,6 @@ class MollieController extends AbstractController
 
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-
         $payment = $mollie->payments->create([
             "amount" => [
                 "currency" => "EUR",
@@ -84,7 +80,9 @@ class MollieController extends AbstractController
             $em->persist($betaling);
             $em->flush();
         }
-
+        if ($payment->isOpen() === FALSE) {
+            return $this->redirect('mollie/canceled.html.twig');
+        }
         return $this->redirect($payment->getCheckoutUrl());
     }
 

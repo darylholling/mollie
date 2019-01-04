@@ -11,116 +11,119 @@
             {% set count = 0 %}
 
             {% if cart is empty %}
-            <h5>Your shopping cart is empty.</h5>
+                <h5>Your shopping cart is empty.</h5>
             {% else %}
+                {% if product %}
+                    <div class="row">
+                        {% for key, item in cart %}
+                            {% for row in product %}
+                                {% if row.id == key %}
+                                    <div class="col-md-8">
+                                        <div class="card">
+                                            <div class="row no-gutters">
+                                                <div class="col-auto">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('images/products/' ~ row.imageName) }}"
+                                                         alt="images" width="200px">
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card-block px-2">
+                                                        <h4 class="card-title">{{ row.name }}</h4>
+                                                        <h5 class="card-text">
+                                                            €{{ row.prijs | number_format(2) }}
+                                                        </h5>
+                                                        <table class="card-text">
+                                                            <tbody>
+                                                            <tr>
+                                                                <th>Artikel nr:</th>
+                                                                <td>{{ row.id }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Omschrijving:</th>
+                                                                <td>{{ row.omschrijving|capitalize }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Aantal:</th>
+                                                                <td>{{ item }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Totaal:</th>
+                                                                <td>€{{ (row.prijs * item) | number_format(2) }}</td>
+                                                                {% set total = total + (row.prijs * item) %}
 
-            {% if product %}
-                {% for key, item in cart %}
-                    {% for row in product %}
-                        {% if row.id == key %}
-            <div class="row">
-                 <div class="col-md-8">
-                     <div class="card">
-                        <div class="row no-gutters">
-                            <div class="col-auto">
-                                <img class="img-fluid" src="{{ asset('images/products/' ~ row.imageName) }}"
-                                     alt="images" width="200px">
-                            </div>
-                                    <div class="col">
-                                    <div class="card-block px-2">
-                                    <h4 class="card-title">{{ row.name }}</h4>
-                                    <h5 class="card-text">
-                                        €{{ row.prijs | number_format(2) }}
-                                    </h5>
-                                    <table class="card-text">
-                                    <tbody>
-                                    <tr>
-                                        <th>Artikel nr:</th>
-                                        <td>{{ row.id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Omschrijving:</th>
-                                        <td>{{ row.omschrijving|capitalize }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Aantal:</th>
-                                        <td>{{ item }}</td>
-                                    </tr>
-                                    <tr>
-                                    <th>Totaal:</th>
-                                    <td>€{{ (row.prijs * item) | number_format(2) }}</td>
-                                    {% set total = total + (row.prijs * item) %}
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <a href="{{ path('cart_add', {'id': key}) }}">
+                                                            <button class="btn btn-success col-md-4">Add</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <a href="{{ path('cart_remove', {'id': key}) }}"
+                                                   onclick="return confirm('are u sure?')"
+                                                   class="cartRemoveBtn">
+                                                    <i class="fa fa-times pull-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 {% endif %}
                             {% endfor %}
-                        </tr>
-                            </tbody>
-                            </table>
-                            <a href="#" class="btn btn-primary">BUTTON</a>
-                            <a href="{{ path('cart_add', {'id': key}) }}">
-                                <button class="btn btn-success">Add</button>
-                            </a>
-                            </div>
-                            </div>
-                            <a href="{{ path('cart_remove', {'id': key}) }}"
-                               onclick="return confirm('are u sure?')"
-                               class="cartRemoveBtn">
-                                <i class="fa fa-times pull-right"></i>
-                            </a>
-                            </div>
-                    </div>
-                    </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6>
-                                            SHOPPINGBAG TOTAAL
-                                        </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="card-text">
-                                            <tbody>
-                                            <tr>
-                                                <th>Bestelwaarde:</th>
-                                                <td>€{{ total | number_format(2) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Korting:</th>
-                                                <td></td>
-                                            </tr>
-                                            {% if total < 50 %}
-                                                {% set bezorgkosten = 5 %}
-                                            {% else %}
-                                                {% set bezorgkosten = 0 %}
-                                            {% endif %}
-                                            {% set total = (total + bezorgkosten) %}
-                                            <tr>
-                                                <th>Verzendkosten:</th>
-                                                <td>€{{ bezorgkosten|number_format(2) }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Totaal:</th>
-                                                <td>€{{ total | number_format(2) }}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-footer">
-                                        <a href="{{ path('product_overview') }}">
-                                            <button type="button" class="btn btn-info right">Go on shopping!</button>
-                                        </a>
-                                        {% if cart is not empty %}
-                                            <a href="{{ path('checkout') }}">
-                                                <button type="button" class="btn btn-success col-md-6 float-right">Checkout!
-                                                </button>
-                                            </a>
+                        {% endfor %}
+
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6>
+                                        SHOPPINGBAG TOTAAL
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="card-text">
+                                        <tbody>
+                                        <tr>
+                                            <th>Bestelwaarde:</th>
+                                            <td>€{{ total | number_format(2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Korting:</th>
+                                            <td></td>
+                                        </tr>
+                                        {% if total < 50 %}
+                                            {% set bezorgkosten = 5 %}
+                                        {% else %}
+                                            {% set bezorgkosten = 0 %}
                                         {% endif %}
+                                        {% set total = (total + bezorgkosten) %}
+                                        <tr>
+                                            <th>Verzendkosten:</th>
+                                            <td>€{{ bezorgkosten|number_format(2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Totaal:</th>
+                                            <td>€{{ total | number_format(2) }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ path('product_overview') }}">
+                                        <button type="button" class="btn btn-info right">Go on shopping!
+                                        </button>
+                                    </a>
+                                    {% if cart is not empty %}
+                                        <a href="{{ path('checkout') }}">
+                                            <button type="button"
+                                                    class="btn btn-success col-md-6 float-right">Checkout!
+                                            </button>
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {% endif %}
             {% endif %}
         </ul>
-        {% endif %}
     </div>
 {% endblock %}
