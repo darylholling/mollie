@@ -25,7 +25,7 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.omschrijving }}</td>
-                <td>{{ product.prijs }}</td>
+                <td>€{{ product.prijs|number_format(2) }}</td>
                 <td><img src="{{ asset('images/products/' ~ product.imageName) }}" alt="images" width="80px"></td>
                 {#<td>{{ product.updatedAt ? product.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
                 <td>

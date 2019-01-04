@@ -3,6 +3,7 @@
         <a href="{{ path('profile_index') }}" class="list-group-item list-group-item-action">Dashboard</a>
         <a href="{{ path('fos_user_profile_edit') }}" class="list-group-item list-group-item-action">Accountinformatie</a>
         <a href="{{ path('profile_edit', {'id': app.user.id}) }}" class="list-group-item list-group-item-action">Adresboek</a>
+        <a href="{{ path('fos_user_change_password', {'id': app.user.id}) }}" class="list-group-item list-group-item-action">Wachtwoord wijzigen</a>
         <a href="{{ path('profile_factuur') }}" class="list-group-item list-group-item-action">Mijn bestellingen</a>
     </div>
 </div>

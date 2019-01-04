@@ -100,7 +100,7 @@ class Betaling
     }
     public function __toString()
     {
-        return $this->getStatus();
+        return $this->getOrderId() . $this->getStatus();
     }
 
 }

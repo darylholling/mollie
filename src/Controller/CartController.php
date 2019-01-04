@@ -73,40 +73,6 @@ class CartController extends Controller
     }
 
     /**
-     * @Route("/checkout", name="checkout")
-     * @throws \Exception
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     */
-    public function checkoutAction()
-    {
-        // verwerken van regels in de nieuwe factuur voor de huidige klant.
-        $session = $this->get('request_stack')->getCurrentRequest()->getSession();
-        $cart = $session->get('cart', array());
-        // aanmaken factuur regel.
-        $em = $this->getDoctrine()->getManager();
-        $factuur = new Factuur();
-        $factuur->setTimestamp(new \DateTime("now"));
-        $factuur->setUser($this->getUser());
-
-        if (isset($cart)) {
-            $em->persist($factuur);
-            $em->flush();
-            // put basket in database
-            foreach ($cart as $id => $quantity) {
-                $regel = new Orderregel();
-                $regel->setFactuur($factuur);
-                $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
-                $regel->setAantal($quantity);
-                $regel->setProduct($product);
-                $em->persist($regel);
-                $em->flush();
-            }
-        }
-        $session->clear();
-        return $this->redirectToRoute('molly_new');
-    }
-
-    /**
      * @Route("/remove/{id}", name="cart_remove")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -120,7 +86,6 @@ class CartController extends Controller
         if (!$cart[$id]) {
             $this->redirect($this->generateUrl('cart_index'));
         }
-
 
         // check if the $id already exists in it.
         if (isset($cart[$id])) {

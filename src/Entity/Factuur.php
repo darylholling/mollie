@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,6 +14,7 @@ class Factuur
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Orderregel", mappedBy="factuur")
      */
     private $id;
 
@@ -30,7 +32,6 @@ class Factuur
      * @ORM\OneToOne(targetEntity="App\Entity\Betaling")
      */
     private $betaald;
-
 
 
     /**
@@ -91,6 +92,9 @@ class Factuur
     {
         return $this->getId() . ' ' . $this->getUser();
     }
+
+
+
 
 
 }

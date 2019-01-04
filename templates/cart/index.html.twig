@@ -60,7 +60,7 @@
                                                     </div>
                                                 </div>
                                                 <a href="{{ path('cart_remove', {'id': key}) }}"
-                                                   onclick="return confirm('are u sure?')"
+                                                   onclick="return confirm('Weet u zeker dat u dit item wilt verwijderen uit de winkelwagen?')"
                                                    class="cartRemoveBtn">
                                                     <i class="fa fa-times pull-right"></i>
                                                 </a>
@@ -112,7 +112,7 @@
                                         </button>
                                     </a>
                                     {% if cart is not empty %}
-                                        <a href="{{ path('checkout') }}">
+                                        <a href="{{ path('mollie_new') }}">
                                             <button type="button"
                                                     class="btn btn-success col-md-6 float-right">Checkout!
                                             </button>

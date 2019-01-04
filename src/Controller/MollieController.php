@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/mollie")
@@ -31,59 +30,6 @@ class MollieController extends AbstractController
         return $this->render('mollie/index.html.twig', [
             'betalings' => $betalingRepository->findAll()
         ]);
-    }
-
-    /**
-     * @Route("/new", name="molly_new", methods={"GET"})
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @throws ApiException
-     * @throws IncompatiblePlatform
-     */
-    public function new()
-    {
-        $mollie = new MollieApiClient();
-        $mollie->setApiKey("test_TqNqMzGfxk9eqjxEVFgDEEcbKyrDW4");
-
-        $orderId = time();
-
-        /*
-         * Determine the url parts to these example files.
-         */
-        $redirectUrl = $this->generateUrl('payments_show', [
-            'orderId' => $orderId
-        ], UrlGeneratorInterface::ABSOLUTE_URL);
-        $webhookUrl = $this->generateUrl('hook_show', [
-
-        ], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $payment = $mollie->payments->create([
-            "amount" => [
-                "currency" => "EUR",
-                "value" => "10.00"
-            ],
-            "description" => "My first payment" . $orderId,
-            "redirectUrl" => $redirectUrl,
-//            "webhookUrl" => $webhookUrl,
-            "webhookUrl" => "https://d17b6858.ngrok.io/mollie/webhook",
-            "metadata" => [
-                "order_id" => $orderId,
-            ],
-        ]);
-        if ($payment) {
-            $betaling = new Betaling();
-            $betaling->setOrderId($payment->metadata->order_id);
-            $betaling->setDescription($payment->description);
-            $betaling->setStatus($payment->status);
-            $betaling->setHook($payment->id);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($betaling);
-            $em->flush();
-        }
-        if ($payment->isOpen() === FALSE) {
-            return $this->redirect('mollie/canceled.html.twig');
-        }
-        return $this->redirect($payment->getCheckoutUrl());
     }
 
     /**

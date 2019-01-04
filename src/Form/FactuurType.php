@@ -20,16 +20,18 @@ class FactuurType extends AbstractType
                 'attr' => array('class' => 'myDatePickerInput')
             ))
             ->add('user')
-//            ->add('regels', CollectionType::class, array(
-//                'entry_type' => OrderregelType::class,
-//                'entry_options' => array('label' => false),
+            ->add('betaald')
+//            ->add('regel', CollectionType::class, array(
+//                    'entry_type' => OrderregelType::class,
+//                    'entry_options' => array('label' => false),
 //                    'allow_add' => true,
 //                    'allow_delete' => true,
 //                    'delete_empty' => true,
 //                    'prototype' => true,
 //                    'attr' => array('class' => 'my-selector',
 //                    ),
-//                    'by_reference' => false)
+//                    'by_reference' => false
+//                )
 //            )
         ;
     }

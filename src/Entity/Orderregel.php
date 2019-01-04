@@ -17,7 +17,7 @@ class Orderregel
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Factuur")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Factuur", inversedBy="id")
      */
     private $factuur;
 
