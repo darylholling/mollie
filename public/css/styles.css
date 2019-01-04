@@ -181,3 +181,10 @@ input div .form-control {
 .pomschrijving{
     margin: 40px 0;
 }
+
+.cartRemoveBtn{
+    color: black;
+    font-size: 30px;
+    margin-right: 1%;
+    margin-top: 1%;
+}
