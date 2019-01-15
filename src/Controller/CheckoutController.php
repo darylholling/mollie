@@ -113,7 +113,7 @@ class CheckoutController extends AbstractController
             }
         }
         $session->clear();
-        return $this->redirectToRoute('order_complete');
+        return $this->redirectToRoute('order_complete', ['factuur' => $factuur]);
     }
 
     /**

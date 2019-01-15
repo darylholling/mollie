@@ -36,6 +36,7 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/", name="profile_index", methods={"GET"})
+     * @\Sensio\Bundle\FrameworkExtraBundle\Configuration\Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @return Response
      */
     public function index(): Response
@@ -57,7 +58,7 @@ class ProfileController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
-                return $this->redirectToRoute('profile_edit', ['id' => $user->getId()]);
+                return $this->redirectToRoute('profile_index');
             }
             return $this->render('profile/adresboek.html.twig', [
                 'user' => $user,
